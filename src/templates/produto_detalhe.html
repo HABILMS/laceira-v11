@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lea Rosa - Detalhes do Produto</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    
+    {% block content %}
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                {% if produto.imagem %}
+                <img src="{{ produto.imagem }}" class="img-fluid rounded" alt="{{ produto.nome }}">
+                {% else %}
+                <img src="{{ url_for('static', filename='images/logo.jpeg') }}" class="img-fluid rounded" alt="{{ produto.nome }}">
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <h1 class="mb-3">{{ produto.nome }}</h1>
+                {% if produto.colecao %}
+                <span class="badge badge-collection mb-3">{{ produto.colecao }}</span>
+                {% endif %}
+                <p class="mb-4">{{ produto.descricao }}</p>
+                <h3 class="price mb-4">R$ {{ "%.2f"|format(produto.preco) }}</h3>
+                
+                <form action="{{ url_for('carrinho.adicionar_ao_carrinho') }}" method="POST">
+                    <input type="hidden" name="produto_id" value="{{ produto.id }}">
+                    <div class="mb-3">
+                        <label for="quantidade" class="form-label">Quantidade</label>
+                        <input type="number" class="form-control" id="quantidade" name="quantidade" value="1" min="1" max="10" style="max-width: 100px;">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Adicionar ao Carrinho</button>
+                </form>
+                
+                <div class="mt-4">
+                    <h5>Compartilhar:</h5>
+                    <div class="d-flex">
+                        <a href="https://wa.me/?text={{ 'Confira este lindo laço da Lea Rosa: ' ~ request.url }}" class="social-icon me-2" target="_blank" style="color: #25D366;">
+                            <i class="fab fa-whatsapp fa-lg"></i>
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" class="social-icon me-2" target="_blank" style="color: #3b5998;">
+                            <i class="fab fa-facebook fa-lg"></i>
+                        </a>
+                        <a href="https://pinterest.com/pin/create/button/?url={{ request.url }}&media={{ produto.imagem }}&description={{ produto.nome }}" class="social-icon" target="_blank" style="color: #E60023;">
+                            <i class="fab fa-pinterest fa-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="section-title">Produtos Relacionados</h3>
+                <div class="row">
+                    {% for p in produtos[:4] if p.id != produto.id %}
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="card h-100">
+                            {% if p.imagem %}
+                            <img src="{{ p.imagem }}" class="card-img-top" alt="{{ p.nome }}">
+                            {% else %}
+                            <img src="{{ url_for('static', filename='images/logo.jpeg') }}" class="card-img-top" alt="{{ p.nome }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ p.nome }}</h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">R$ {{ "%.2f"|format(p.preco) }}</span>
+                                    <a href="{{ url_for('produto_detalhe', produto_id=p.id) }}" class="btn btn-outline-primary btn-sm">Ver Detalhes</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock %}
+</body>
+</html>

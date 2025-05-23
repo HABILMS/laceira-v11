@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lea Rosa - QR Code PIX</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    
+    {% block content %}
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-lg-6 mx-auto text-center">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="mb-4">Pagamento via PIX</h1>
+                        
+                        <div class="mb-4">
+                            <img src="data:image/png;base64,{{ qrcode_data }}" alt="QR Code PIX" class="img-fluid" style="max-width: 300px;">
+                        </div>
+                        
+                        <div class="alert alert-info mb-4">
+                            <h5>Detalhes do Pagamento:</h5>
+                            <p><strong>Chave PIX:</strong> {{ chave_pix }}</p>
+                            <p><strong>Valor:</strong> R$ {{ "%.2f"|format(valor) }}</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <p>Escaneie o QR Code acima com o aplicativo do seu banco para realizar o pagamento via PIX.</p>
+                            <p>Após o pagamento, envie o comprovante via WhatsApp para confirmar seu pedido.</p>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <a href="javascript:window.print();" class="btn btn-outline-primary me-2">
+                                <i class="fas fa-print me-2"></i> Imprimir QR Code
+                            </a>
+                            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Voltar para a Loja</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lea Rosa - Catálogo</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    
+    {% block content %}
+    <section class="container my-5">
+        <h1 class="section-title text-center">Catálogo de Laços</h1>
+        
+        <div class="row mt-4">
+            {% for produto in produtos %}
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100">
+                    {% if produto.imagem %}
+                    <img src="{{ produto.imagem }}" class="card-img-top" alt="{{ produto.nome }}">
+                    {% else %}
+                    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" class="card-img-top" alt="{{ produto.nome }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ produto.nome }}</h5>
+                        {% if produto.colecao %}
+                        <span class="badge badge-collection mb-2">{{ produto.colecao }}</span>
+                        {% endif %}
+                        <p class="card-text">{{ produto.descricao|truncate(100) }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="price">R$ {{ "%.2f"|format(produto.preco) }}</span>
+                            <a href="{{ url_for('produto_detalhe', produto_id=produto.id) }}" class="btn btn-outline-primary btn-sm">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% if not produtos %}
+        <div class="text-center my-5">
+            <h3>Nenhum produto disponível no momento.</h3>
+            <p>Em breve teremos novidades para você!</p>
+        </div>
+        {% endif %}
+    </section>
+    {% endblock %}
+</body>
+</html>

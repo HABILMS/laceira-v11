@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lea Rosa - Catálogo de Laços Artesanais</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #d4006e;
+            --secondary-color: #f8c8e0;
+            --accent-color: #f06292;
+            --text-color: #333;
+            --light-color: #fff;
+            --border-radius: 15px;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            background-color: #fdf6fa;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand img {
+            max-height: 50px;
+            border-radius: 50%;
+        }
+        
+        .nav-link {
+            color: var(--light-color) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--secondary-color) !important;
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 8px 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #b1005a;
+            border-color: #b1005a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 8px 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .card {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: all 0.3s;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .card-title {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .card-text {
+            color: var(--text-color);
+        }
+        
+        .price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .hero-section {
+            background-color: var(--secondary-color);
+            padding: 60px 0;
+            margin-bottom: 40px;
+            border-radius: 0 0 30px 30px;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        
+        .social-icon {
+            color: var(--light-color);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .form-control {
+            border-radius: var(--border-radius);
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+        }
+        
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(212, 0, 110, 0.2);
+            border-color: var(--primary-color);
+        }
+        
+        .badge-collection {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+        
+        .cart-icon {
+            position: relative;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .hero-section {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Lea Rosa Logo" class="img-fluid">
+                Lea Rosa
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('index') }}">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('catalogo') }}">Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('sobre') }}">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contato') }}">Contato</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cart-icon" href="{{ url_for('carrinho.ver_carrinho') }}">
+                            <i class="fas fa-shopping-cart"></i>
+                            {% if session.get('carrinho_id') %}
+                                <span class="cart-count">1</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    {% if session.get('user_id') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('admin.dashboard') }}">
+                                <i class="fas fa-user-circle"></i> Admin
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('auth.login') }}">
+                                <i class="fas fa-sign-in-alt"></i> Login
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="container mt-3">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>Lea Rosa</h5>
+                    <p>Laços artesanais feitos com amor e dedicação para deixar seu visual ainda mais especial.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contato</h5>
+                    <p>
+                        <i class="fas fa-phone me-2"></i> {{ admin.telefone if admin else '(67) 98449-4746' }}<br>
+                        <i class="fab fa-whatsapp me-2"></i> {{ admin.whatsapp if admin else '(67) 98449-4746' }}<br>
+                        <i class="fab fa-instagram me-2"></i> {{ admin.instagram if admin else '@learosaacesorios' }}
+                    </p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Redes Sociais</h5>
+                    <div class="d-flex">
+                        <a href="https://instagram.com/{{ admin.instagram if admin else 'learosaacesorios' }}" class="social-icon" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/{{ admin.whatsapp.replace(' ', '').replace('-', '').replace('(', '').replace(')', '') if admin else '5567984494746' }}" class="social-icon" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; 2025 Lea Rosa - Todos os direitos reservados</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

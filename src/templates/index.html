@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lea Rosa - Página Inicial</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    
+    {% block content %}
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="hero-title">Laços Artesanais Lea Rosa</h1>
+                    <p class="hero-subtitle">Laços exclusivos feitos com amor e dedicação para deixar seu visual ainda mais especial.</p>
+                    <a href="{{ url_for('catalogo') }}" class="btn btn-primary btn-lg">Ver Catálogo</a>
+                </div>
+                <div class="col-md-6">
+                    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Lea Rosa Laços" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="container my-5">
+        <h2 class="section-title text-center">Produtos em Destaque</h2>
+        <div class="row mt-4">
+            {% for produto in produtos %}
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100">
+                    {% if produto.imagem %}
+                    <img src="{{ produto.imagem }}" class="card-img-top" alt="{{ produto.nome }}">
+                    {% else %}
+                    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" class="card-img-top" alt="{{ produto.nome }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ produto.nome }}</h5>
+                        {% if produto.colecao %}
+                        <span class="badge badge-collection mb-2">{{ produto.colecao }}</span>
+                        {% endif %}
+                        <p class="card-text">{{ produto.descricao|truncate(100) }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="price">R$ {{ "%.2f"|format(produto.preco) }}</span>
+                            <a href="{{ url_for('produto_detalhe', produto_id=produto.id) }}" class="btn btn-outline-primary btn-sm">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('catalogo') }}" class="btn btn-primary">Ver Todos os Produtos</a>
+        </div>
+    </section>
+    
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center p-4">
+                    <i class="fas fa-heart text-primary mb-3" style="font-size: 3rem;"></i>
+                    <h3>Feito com Amor</h3>
+                    <p>Cada laço é confeccionado com carinho e atenção aos detalhes para garantir a melhor qualidade.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center p-4">
+                    <i class="fas fa-gem text-primary mb-3" style="font-size: 3rem;"></i>
+                    <h3>Materiais Premium</h3>
+                    <p>Utilizamos apenas materiais de alta qualidade para criar laços duráveis e bonitos.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center p-4">
+                    <i class="fas fa-magic text-primary mb-3" style="font-size: 3rem;"></i>
+                    <h3>Designs Exclusivos</h3>
+                    <p>Criamos designs únicos e exclusivos para que você tenha um acessório verdadeiramente especial.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="container my-5">
+        <h2 class="section-title text-center">Como Comprar</h2>
+        <div class="row mt-4">
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 text-center p-4">
+                    <div class="display-4 mb-3">1</div>
+                    <h4>Escolha seus Laços</h4>
+                    <p>Navegue pelo catálogo e escolha os laços que mais combinem com você.</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 text-center p-4">
+                    <div class="display-4 mb-3">2</div>
+                    <h4>Adicione ao Carrinho</h4>
+                    <p>Adicione os produtos desejados ao carrinho de compras.</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 text-center p-4">
+                    <div class="display-4 mb-3">3</div>
+                    <h4>Finalize o Pedido</h4>
+                    <p>Preencha seus dados e finalize o pedido para enviar via WhatsApp.</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 text-center p-4">
+                    <div class="display-4 mb-3">4</div>
+                    <h4>Pague via PIX</h4>
+                    <p>Realize o pagamento via PIX e aguarde a confirmação da entrega.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock %}
+</body>
+</html>
